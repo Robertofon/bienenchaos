@@ -5,6 +5,8 @@ Mehrere Raspi ZeroW
 
 Platinen drauf.
 
+## Temperatur und Luftfeuchte messen
+
 Selbsgelötetes Board mit Pullupwiderständen zu 5V.  
 Anbindung von aktuell 6 Sensoren des Typs AM2302
 
@@ -21,7 +23,7 @@ GPIOs fürn Raspi und die Sensoren.
 
 
 
-ADDA-Board
+## ADDA-Board
 https://www.waveshare.com/wiki/High-Precision_AD/DA_Board#Interface_Definition
 Frei bleibende Pins
 3, 5, 7, 8, 10, 18, 22, 24, 26, 27, 28, 29, 32, 36, 38, 40
@@ -35,6 +37,14 @@ Verlängert durch Netzwerk
 * Rot -> Orange  (Spannungsversorgung +)
 * Gelb -> Hellorange  (Schirm )
 * Grün -> Grün   (Signal +)
-* Blau -> Blau  (nix nix)
 * Schwarz -> Braun  (Spannungsversorgung -)
 * Weiß -> Hellbraun (Signal -)
+
+
+## Helfende Repos
+
+DHT22 (AM2302) auslesen:  
+https://github.com/adafruit/Adafruit_Python_DHT.git
+
+Neuer:  
+https://learn.adafruit.com/dht-humidity-sensing-on-raspberry-pi-with-gdocs-logging/python-setup
