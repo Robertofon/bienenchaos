@@ -197,8 +197,9 @@ def tim_nice_output(digits, volts):
         + "\n\033[J\0338" # Restore cursor position etc.
     )
     total_1=res
-    write_csv(res)
-
+    #write_csv(res)
+    to_grafana(csv)
+    
 def write_csv(res):
     with open('data.csv', 'a') as csv_file:
         csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
@@ -224,6 +225,13 @@ def write_csv(res):
 
     time.sleep(.001) 
     master.update()
+
+def to_grafana(res):
+    try:
+        os.system("curl -i -XPOST '172.23.92.63:8086/write?db=mydb&u=admin&p=PASSWORD' --data-binary 'weight,location=bees01 value="str(res))+"'")
+    except:
+        print("no access to grafana?")
+        pass
     
 x_value=0    
 do_measurement()
