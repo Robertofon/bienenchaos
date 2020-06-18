@@ -35,7 +35,7 @@ https://github.com/ul-gh/PiPyADC
 Verlängerung der Waage (CN) Kabelfarben
 Verlängert durch Netzwerk
 * Rot -> Orange  (Spannungsversorgung +)
-* Gelb -> Hellorange
+* Gelb -> Hellorange  (Schirm )
 * Grün -> Grün   (Signal +)
 * Schwarz -> Braun  (Spannungsversorgung -)
 * Weiß -> Hellbraun (Signal -)
