@@ -6,8 +6,10 @@
 import sys
 import datetime
 import time
-#import Adafruit_DHT
+import Adafruit_DHT
 
+grafanaurl=%GRAFANA_URL%
+grafanentpoint=%GRAFANA_ENDP%
 
 # Einfach alle Sensoren der Reihe nach auslesen
 sensoren  = [
