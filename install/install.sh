@@ -20,10 +20,11 @@ sudo apt-get upgrade
 # wir brauchen python3
 sudo apt install python3
 # wir brauchen pip3
-#nö: sudo apt-get install python3-pip
+sudo apt-get install python3-pip
 #Nö: sudo pip3 install --upgrade setuptools
 
 # Run the following command to install the Raspberry PI GPIO library:
 #Nö pip3 install RPI.GPIO
 #pip3 install adafruit-blinka
 
+sudo pip3 install Adafruit_DHT
