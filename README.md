@@ -43,6 +43,9 @@ Verlängert durch Netzwerk
 
 ## Helfende Repos
 
+Credits gehen an ul-gh für sein Repo PiPyADC
+https://github.com/ul-gh/PiPyADC
+
 DHT22 (AM2302) auslesen:  
 https://github.com/adafruit/Adafruit_Python_DHT.git
 
