@@ -27,7 +27,7 @@ done
 
 # Repo von ul-gh/PiPyADC in /opt/bienen clonen
 git submodule update --init
-cp -av PiPyADC /opt/bienen/PiPyADC 
+cp -av PiPyADC/* /opt/bienen/PiPyADC/ 
 
 # systemd unit files kopieren und chmod
 cp src/systemd/temp-feuchte-sammler.service /etc/systemd/system/temp-feuchte-sammler.service
@@ -40,5 +40,5 @@ systemctl enable temp-feuchte-sammler
 systemctl enable weight-sammler
 
 # und starten
-systemctl start temp-feuchte-sammler
-systemctl start weight-sammler
+systemctl restart temp-feuchte-sammler
+systemctl restart weight-sammler
