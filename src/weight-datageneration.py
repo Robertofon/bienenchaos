@@ -2,7 +2,7 @@ import csv
 import random
 import time, os
 import sys
-import sys.path.append('PiPyADC')
+sys.path.append('PiPyADC')
 import time
 import numpy as np
 import itertools
