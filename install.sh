@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "Install skript für die Dienste um Bienentemperatur, Gewicht und Feuchte zu messen. Es werden 3 Dienste erstellt, die im Hintergrund laufen. Publiziert wird via Grafana. Daher muss die Variable GRAFANAENDP gesetzt sein mit host:port und zusätzlich GRAFANADB mit DB-name"
 
 if [ -z "$GRAFANA_URL" ] 
 then
@@ -17,15 +16,15 @@ apt-get update
 apt-get upgrade
 
 # wir brauchen python3
-apt install python3
+apt install -y python3
 # wir brauchen pip3
-apt-get install python3-pip
+apt-get install -y python3-pip
 #Nö: sudo pip3 install --upgrade setuptools
 
 # Run the following command to install the Raspberry PI GPIO library:
 #Nö pip3 install RPI.GPIO
 #pip3 install adafruit-blinka
-sudo pip3 install Adafruit_DHT
+pip3 install -y Adafruit_DHT
 
 
 # Skripte nach usr/bin kopieren
@@ -39,7 +38,6 @@ done
 
 # systemd unit files kopieren und chmod
 cp src/systemd/temp+feuchte-sammler.service /etc/systemd/system/temp+feuchte-sammler.service
-chmod 644 /etc/systemd/system/temp+feuchte-sammler.service
 cp src/systemd/weight-sammler.service /etc/systemd/system/weight-sammler.service
 chmod 644 /etc/systemd/system/weight-sammler.service
 
