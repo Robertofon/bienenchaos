@@ -14,12 +14,12 @@ grafanaurl="%GRAFANA_URL%"    #172.23.92.63:8086/write?db=mydb&u=admin&p=PASSWOR
 
 # Einfach alle Sensoren der Reihe nach auslesen
 sensoren  = [
-{'Name': 'Bienen0_o', 'GPIO': 8, 'Pin': 24, 'Ziel': 'B0-o'},
-{'Name': 'Bienen0_u', 'GPIO': 7, 'Pin': 26, 'Ziel': 'B0-u'},
-{'Name': 'Bienen1_o', 'GPIO': 12, 'Pin': 32, 'Ziel': 'B1-o'},
-{'Name': 'Bienen1_u', 'GPIO': 16, 'Pin': 36, 'Ziel': 'B1-u'},
-{'Name': 'Bienen2_o', 'GPIO': 20, 'Pin': 38, 'Ziel': 'B2-o'},
-{'Name': 'Bienen2_u', 'GPIO': 21, 'Pin': 40, 'Ziel': 'B2-u'},
+{'Name': 'Bienen0_o', 'GPIO': 7, 'Pin': 26, 'Ziel': 'B0-o'},
+{'Name': 'Bienen0_u', 'GPIO': 8, 'Pin': 24, 'Ziel': 'B0-u'},
+{'Name': 'Bienen1_o', 'GPIO': 16, 'Pin': 36, 'Ziel': 'B1-o'},
+{'Name': 'Bienen1_u', 'GPIO': 12, 'Pin': 32, 'Ziel': 'B1-u'},
+{'Name': 'Bienen2_o', 'GPIO': 21, 'Pin': 40, 'Ziel': 'B2-o'},
+{'Name': 'Bienen2_u', 'GPIO': 20, 'Pin': 38, 'Ziel': 'B2-u'},
 ]
 intervall = 10
 jez = datetime.datetime.now().isoformat()
