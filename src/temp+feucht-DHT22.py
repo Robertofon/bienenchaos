@@ -1,15 +1,16 @@
 #!/usr/bin/python
 # Author: Robert Köpferl
-# Skript, um Sensoren des Typs AD2302 auszulesen und die umgerechneten
+# Skript, um Sensoren des Typs AM2302 auszulesen und die umgerechneten
 # Temperatur und Luftfeuchte-Werte zu pushen
 
-import sys
+import sys,os
 import datetime
 import time
 import Adafruit_DHT
 
-grafanaurl=%GRAFANA_URL%
-grafanentpoint=%GRAFANA_ENDP%
+
+grafanaurl=%GRAFANA_URL%    #172.23.92.63:8086/write?db=mydb&u=admin&p=PASSWORD
+
 
 # Einfach alle Sensoren der Reihe nach auslesen
 sensoren  = [
@@ -34,8 +35,9 @@ while True:
         # Try to grab a sensor reading.  Use the read_retry method which will retry up
         # to 15 times to get a sensor reading (waiting 2 seconds between each retry).
         # using read fails immediately
-        #humidity, temperature = Adafruit_DHT.read('22', gpio)
-        humidity, temperature = None,None
+        print ("GPIO: ", gpio,"  pin: ",sensor["Pin"]) 
+        humidity, temperature = Adafruit_DHT.read(Adafruit_DHT.DHT22, gpio)
+        #humidity, temperature = None,None
 
         # Note that sometimes you won't get a reading and
         # the results will be null (because Linux can't
@@ -43,8 +45,12 @@ while True:
         # If this happens try again!
         if humidity is not None and temperature is not None:
             print('Temp={0:0.1f}°C  Humidity={1:0.1f}%'.format(temperature, humidity))
+            os.system("curl -i -XPOST '"+grafanaurl+"' --data-binary 'temperature,location="+sensor['Ziel']+" value="+str(temperature)+"'")
+            os.system("curl -i -XPOST '"+grafanaurl+"' --data-binary 'humidity,location="+sensor['Ziel']+" value="+str(humidity)+"'")
         else:
             jez = datetime.datetime.now().isoformat()
             print(f"{jez} Fehler bei Sensor {sensor['Name']} Pin:{sensor['Pin']} - keine Werte erhalten.")
+        time.sleep(.01)
     # eine Runde pennen
     time.sleep(intervall)
+
