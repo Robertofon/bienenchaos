@@ -26,7 +26,7 @@ do
 done
 
 # Repo von ul-gh/PiPyADC in /opt/bienen clonen
-git submodule update PiPyADC
+git submodule update --init
 cp -av PiPyADC /opt/bienen/PiPyADC 
 
 # systemd unit files kopieren und chmod
