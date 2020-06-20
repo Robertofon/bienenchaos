@@ -9,7 +9,7 @@ import time
 import Adafruit_DHT
 
 
-grafanaurl=%GRAFANA_URL%    #172.23.92.63:8086/write?db=mydb&u=admin&p=PASSWORD
+grafanaurl="%GRAFANA_URL%"    #172.23.92.63:8086/write?db=mydb&u=admin&p=PASSWORD
 
 
 # Einfach alle Sensoren der Reihe nach auslesen

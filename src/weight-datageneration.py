@@ -22,6 +22,7 @@ def fetch(e):
     
 name_input="Nobody"
 
+grafanaurl="%GRAFANA_URL%"    #172.23.92.63:8086/write?db=mydb&u=admin&p=PASSWORD
 master = Tk()
 Label(master, text="Name").grid(row=0)
 e1 = Entry(master,font=("Arial", 26))

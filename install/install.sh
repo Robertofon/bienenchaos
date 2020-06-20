@@ -1,21 +1,9 @@
 #!/bin/bash
 echo "Install skript für die Dienste um Bienentemperatur, Gewicht und Feuchte zu messen. Es werden 3 Dienste erstellt, die im Hintergrund laufen. Publiziert wird via Grafana. Daher muss die Variable GRAFANAENDP gesetzt sein mit host:port und zusätzlich GRAFANADB mit DB-name"
 
-if [ -z "$GRAFANA_ENDP" ] 
-then
-    echo "GRAFANA_ENDP nicht gesetzt. Ende."
-    exit 1
-fi
-
 if [ -z "$GRAFANA_URL" ] 
 then
     echo "GRAFANA_URL nicht gesetzt. Ende."
-    exit 1
-fi
-
-if [ -z "$GRAFANADB" ]
-then
-    echo "GRAFANADB nicht gesetzt. Ende."
     exit 1
 fi
 
@@ -46,7 +34,7 @@ sudo pip3 install Adafruit_DHT
 #cp src/weight-datageneration.py /usr/bin/weight-datageneration.py
 for f in temp+feucht-DHT22.py weight-datageneration.py
 do
-    cat src/$f | sed s/%GRAFANA_URL%/${GRAFANA_URL}/ | sed s/%GRAFANA_ENDP%/${GRAFANA_ENDP}/ > /usr/bin/$f
+    cat src/$f | sed s/%GRAFANA_URL%/${GRAFANA_URL}/  > /usr/bin/$f
 done
 
 # systemd unit files kopieren und chmod
