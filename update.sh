@@ -22,7 +22,7 @@ do
     Var=${GRAFANA_URL//\//\\/}
     # & ersetzen durch \&
     Var=${Var//[&]/\\&}
-    cat src/$f | sed 's/%GRAFANA_URL%/'$Var'/' > /usr/bin/$f
+    cat src/$f | sed 's/%GRAFANA_URL%/'$Var'/' > /opt/bienen/$f
 done
 
 # Repo von ul-gh/PiPyADC in /opt/bienen clonen
