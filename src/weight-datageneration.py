@@ -229,7 +229,7 @@ def write_csv(res):
 
 def to_grafana(res):
     try:
-        os.system("curl -i -XPOST '"+grafanaurl+"' --data-binary 'weight,location=bees01 value="str(res))+"'")
+        os.system("curl -i -XPOST '"+grafanaurl+"' --data-binary 'weight,location=bees01 value="+str(res))+"'")
     except:
         print("no access to grafana?")
         pass
