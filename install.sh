@@ -26,5 +26,7 @@ apt -y install python3-pip
 #pip3 install adafruit-blinka
 pip3 install Adafruit_DHT
 
+pip3 install numpy
+
 # Jetzt noch die Dateien positionieren und Services aktivieren
 ./update.sh
