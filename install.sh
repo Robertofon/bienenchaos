@@ -24,7 +24,7 @@ apt -y install python3-pip
 # Run the following command to install the Raspberry PI GPIO library:
 #Nö pip3 install RPI.GPIO
 #pip3 install adafruit-blinka
-pip3 -y install Adafruit_DHT
+pip3 install Adafruit_DHT
 
 
 # Skripte nach usr/bin kopieren
@@ -33,7 +33,11 @@ pip3 -y install Adafruit_DHT
 #cp src/weight-datageneration.py /usr/bin/weight-datageneration.py
 for f in temp+feucht-DHT22.py weight-datageneration.py
 do
-    cat src/$f | sed s/%GRAFANA_URL%/${GRAFANA_URL}/  > /usr/bin/$f
+    # / ersetzen durch \/
+    Var=${GRAFANA_URL//\//\\/}
+    # & ersetzen durch \&
+    Var=${Var//[&]/\\&}
+    cat src/$f | sed 's/%GRAFANA_URL%/'$Var'/'  > /usr/bin/$f
 done
 
 # systemd unit files kopieren und chmod
