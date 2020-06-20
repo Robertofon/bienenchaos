@@ -3,7 +3,7 @@ Description=Gewicht-Sammler-service.
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /usr/bin/weight-datageneration.py
+ExecStart=/usr/bin/python3 /opt/bienen/weight-datageneration.py
 
 [Install]
 WantedBy=multi-user.target
