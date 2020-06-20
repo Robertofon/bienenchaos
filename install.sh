@@ -26,6 +26,8 @@ apt -y install python3-pip
 #pip3 install adafruit-blinka
 pip3 install Adafruit_DHT
 
+# numpy
+apt -y install libatlas-base-dev
 pip3 install numpy
 
 # Jetzt noch die Dateien positionieren und Services aktivieren
