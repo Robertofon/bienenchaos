@@ -37,14 +37,14 @@ do
 done
 
 # systemd unit files kopieren und chmod
-cp src/systemd/temp+feuchte-sammler.service /etc/systemd/system/temp+feuchte-sammler.service
+cp src/systemd/temp-feuchte-sammler.service /etc/systemd/system/temp-feuchte-sammler.service
 cp src/systemd/weight-sammler.service /etc/systemd/system/weight-sammler.service
 chmod 644 /etc/systemd/system/weight-sammler.service
 
 # services enablen - starten so automatisch
-systemctl enable temp+feuchte-sammler
+systemctl enable temp-feuchte-sammler
 systemctl enable weight-sammler
 
 # und starten
-systemctl start temp+feuchte-sammler
+systemctl start temp-feuchte-sammler
 systemctl start weight-sammler
