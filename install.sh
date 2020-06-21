@@ -29,7 +29,6 @@ pip3 install wiringpi
 
 # numpy
 apt -y install libatlas-base-dev
-apt -y
 pip3 install numpy
 
 # Jetzt noch die Dateien positionieren und Services aktivieren
