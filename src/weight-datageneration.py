@@ -1,8 +1,22 @@
-import csv
-import random
-import time, os
-import sys
-sys.path.append('PiPyADC')
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""PiPyADC: Example file for class ADS1256 in module pipyadc:
+
+ADS1256 cycling through eight input channels.
+
+Default data rate changed to 100 SPS. Check if hardware is connected.
+Moving average filter over 32 samples.
+
+Reading ADC sample data directly into a Numpy array as a buffer
+for further processing, e.g. FIR filter, PID control, ...
+
+Hardware: Waveshare ADS1256 board interfaced to the Raspberry Pi 3
+ 
+Ulrich Lukas 2017-03-10
+"""
+import sys,os
+sys.path.append('/opt/bienen/PiPyADC')
+
 import time
 import numpy as np
 import itertools
@@ -10,31 +24,31 @@ from ADS1256_definitions import *
 from pipyadc import ADS1256
 # In this example, we pretend myconfig_2 was a different configuration file
 # named "myconfig_2.py" for a second ADS1256 chip connected to the SPI bus.
-import ADS1256_default_config as myconfig_2
+import ADS1256_tim01_config as myconfig_2
 
-print ("TEST")
-def fetch(e):
-    print("NAME: ",e)
-    global name_input
-    global e1
-    name_input=e1.get()
-    
-name_input="Nobody"
-
-grafanaurl="%GRAFANA_URL%"    #172.23.92.63:8086/write?db=mydb&u=admin&p=PASSWORD
-
-x_value = 0
-total_1 = 1000
-total_2 = 1000
-
-fieldnames = ["x_value", "total_1", "name_input"]
-
-
-#with open('data.csv', 'w') as csv_file:
-#    csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-#    csv_writer.writeheader()
+grafanaurl="%GRAFANA_URL%" 
 
 first=True
+### START EXAMPLE ###
+################################################################################
+###  STEP 0: CONFIGURE CHANNELS AND USE DEFAULT OPTIONS FROM CONFIG FILE: ###
+#
+# For channel code values (bitmask) definitions, see ADS1256_definitions.py.
+# The values representing the negative and positive input pins connected to
+# the ADS1256 hardware multiplexer must be bitwise OR-ed to form eight-bit
+# values, which will later be sent to the ADS1256 MUX register. The register
+# can be explicitly read and set via ADS1256.mux property, but here we define
+# a list of differential channels to be input to the ADS1256.read_sequence()
+# method which reads all of them one after another.
+#
+# ==> Each channel in this context represents a differential pair of physical
+# input pins of the ADS1256 input multiplexer.
+#
+# ==> For single-ended measurements, simply select AINCOM as the negative input.
+#
+# AINCOM does not have to be connected to AGND (0V), but it is if the jumper
+# on the Waveshare board is set.
+#
 # Input pin for the potentiometer on the Waveshare Precision ADC board:
 POTI = POS_AIN0|NEG_AINCOM
 # Light dependant resistor of the same board:
@@ -58,6 +72,7 @@ SHORT_CIRCUIT = POS_AIN0|NEG_AIN0
 #CH_SEQUENCE = (POTI, LDR, EXT2, EXT3, EXT4, EXT7, POTI_INVERTED, SHORT_CIRCUIT)
 CH_SEQUENCE = (EXT3,)
 ################################################################################
+
 ##########################  CALIBRATION  CONSTANTS  ############################
 # This shows how to use individual channel calibration values.
 #
@@ -66,13 +81,13 @@ CH_SEQUENCE = (EXT3,)
 # I we want to use individual calibration values, e.g. to compensate external
 # circuitry parasitics, we can do this very easily in software.
 # The following values are only for demonstration and have no meaning.
-CH_OFFSET = np.array((-10,   0, 0,   0, 750,   0,   0,   0), dtype=np.int)
+CH_OFFSET = np.array((-10,   0, -85,   0, 750,   0,   0,   0), dtype=np.int)
 GAIN_CAL  = np.array((1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0), dtype=np.float)
 ################################################################################
 
 # Using the Numpy library, digital signal processing is easy as (Raspberry) Pi..
 # However, this constant only specifies the length of a moving average.
-FILTER_SIZE = 1
+FILTER_SIZE = 2
 ################################################################################
 
 
@@ -151,7 +166,8 @@ def do_measurement():
             ch_unscaled = np.average(filter_buffer, axis=0) - CH_OFFSET
             ch_volts = ch_unscaled * CH_GAIN
 
-        tim_nice_output([int(i) for i in ch_unscaled], ch_volts)
+            to_grafana([int(i) for i in ch_unscaled], ch_volts)
+
 ### END EXAMPLE ###
 
 
@@ -178,8 +194,7 @@ Poti_CH0,  LDR_CH1,     AIN2,     AIN3,     AIN4,     AIN7, Poti NEG, Short 0V
 def tim_nice_output(digits, volts):
     global first
     global res0
-    global total_1
-    res=float(64000*volts[0:1])
+    res=float(85.5+64000*volts[0:1])
     if first:
         res0=res
     res=res-res0
@@ -189,43 +204,32 @@ def tim_nice_output(digits, volts):
         + "{: 8.4f}".format(res)
         + "\n\033[J\0338" # Restore cursor position etc.
     )
-    total_1=res
-    #write_csv(res)
-    to_grafana(csv)
-    
-def write_csv(res):
-    with open('data.csv', 'a') as csv_file:
-        csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        #res=do_measurement()
-        #print("res: ",res)
-        global x_value
-        info = {
-            "x_value": x_value,
-            "total_1": "{: 8.4f}".format(res),
-            "name_input": name_input
-        }
 
-        csv_writer.writerow(info)
-        print(x_value, "{: 8.4f}".format(total_1), name_input)
-        #if x_value>100:
-        #os.system('tail -100 data.csv > temp.csv')
-        #    os.system('head -1 data.csv | cat - temp.csv > newfile.csv && rm -f temp.csv')
-        #else:
-        os.system('tail -100 data.csv > /dev/shm/shortfile.csv')
-        x_value += 1
-        #total_1 = total_1 + random.randint(-8, 8)
-        #total_2 = total_2 + random.randint(-6, 6)
+def to_grafana(digits, volts):
+    global first
+    global res0
+    res=float(85.5+5/7.5*6400*volts[0:1])
 
-    time.sleep(.001) 
-    master.update()
-
-def to_grafana(res):
+    sys.stdout.write(
+          "\0337" # Store cursor position
+        + "{: 8.4f}".format(res)
+        + "\n\033[J\0338" # Restore cursor position etc.
+    )
     try:
         os.system("curl -i -XPOST '"+grafanaurl+"' --data-binary 'weight,location=bees01 value="+str(res)+"'")
     except:
         print("no access to grafana?")
         pass
     time.sleep(5) 
-     
-x_value=0    
-do_measurement()
+
+# Start data acquisition
+try:
+    print("\033[2J\033[H") # Clear screen
+    print(__doc__)
+    print("\nPress CTRL-C to exit.")
+    do_measurement()
+
+except (KeyboardInterrupt):
+    print("\n"*8 + "User exit.\n")
+ 
+
