@@ -2,6 +2,7 @@ import csv
 import random
 import time, os
 import sys
+sys.path.append('PiPyADC')
 import time
 import numpy as np
 import itertools
@@ -9,9 +10,7 @@ from ADS1256_definitions import *
 from pipyadc import ADS1256
 # In this example, we pretend myconfig_2 was a different configuration file
 # named "myconfig_2.py" for a second ADS1256 chip connected to the SPI bus.
-import ADS1256_tim01_config as myconfig_2
-
-from tkinter import *
+import ADS1256_default_config as myconfig_2
 
 print ("TEST")
 def fetch(e):
@@ -23,13 +22,6 @@ def fetch(e):
 name_input="Nobody"
 
 grafanaurl="%GRAFANA_URL%"    #172.23.92.63:8086/write?db=mydb&u=admin&p=PASSWORD
-master = Tk()
-Label(master, text="Name").grid(row=0)
-e1 = Entry(master,font=("Arial", 26))
-e1.bind("<Return>",fetch)
-b1 = Button(master, text='Change', command=(lambda e=e1.get(): fetch(e)))
-e1.grid(row=0, column=0)
-b1.grid(row=0, column=1)
 
 x_value = 0
 total_1 = 1000

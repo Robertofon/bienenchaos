@@ -25,6 +25,7 @@ apt -y install python3-pip
 #Nö pip3 install RPI.GPIO
 #pip3 install adafruit-blinka
 pip3 install Adafruit_DHT
+pip3 install wiringpi
 
 # numpy
 apt -y install libatlas-base-dev
