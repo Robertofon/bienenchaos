@@ -208,7 +208,7 @@ def tim_nice_output(digits, volts):
 def to_grafana(digits, volts):
     global first
     global res0
-    res=float(85.5+5/7.5*6400*volts[0:1])
+    res=float(.26+5/7.5*6400*volts[0:1])
 
     sys.stdout.write(
           "\0337" # Store cursor position
