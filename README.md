@@ -18,6 +18,7 @@ GPIOs fürn Raspi und die Sensoren.
 * GPIO16 (36)   (Bienen1) - Sensor B
 * GPIO20 (38)   (Bienen2) - Sensor A
 * GPIO21 (40)   (Bienen2) - Sensor B
+* GPIO24 (18)  (Extern=Außentemp)
 * 3V3 (17) - Alle Datenkabel via 4,7kOhm auf VCC und alle Sensor-VCC
 * GND (34,30) - Alle Sensor-GND
 

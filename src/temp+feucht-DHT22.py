@@ -20,6 +20,7 @@ sensoren  = [
 {'Name': 'Bienen1_u', 'GPIO': 12, 'Pin': 32, 'Ziel': 'B1-u'},
 {'Name': 'Bienen2_o', 'GPIO': 21, 'Pin': 40, 'Ziel': 'B2-o'},
 {'Name': 'Bienen2_u', 'GPIO': 20, 'Pin': 38, 'Ziel': 'B2-u'},
+{'Name': 'Ext-Umgebung', 'GPIO': 24, 'Pin': 18, 'Ziel': 'Temp-Außen'},
 ]
 intervall = 10
 jez = datetime.datetime.now().isoformat()
