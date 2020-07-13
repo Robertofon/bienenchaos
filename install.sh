@@ -30,6 +30,7 @@ pip3 install wiringpi
 # numpy
 apt -y install libatlas-base-dev
 pip3 install numpy
+pip3 install smbus
 
 # Jetzt noch die Dateien positionieren und Services aktivieren
 ./update.sh
