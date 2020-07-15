@@ -13,10 +13,9 @@ fi
 
 # Skripte nach /opt/bienen kopieren
 mkdir -p /opt/bienen
-# dabei über SED drüberjagen, variablen ersetzen
-#cp src/temp+feucht-DHT22.py /opt/bienen/temp+feucht-DHT22.py
-#cp src/weight-datageneration.py /opt/bienen/weight-datageneration.py
+cp src/nau7802py.py /opt/bienen/nau7802py.py
 cp src/ADS1256_tim01_config.py /opt/bienen/ADS1256_tim01_config.py
+# dabei über SED drüberjagen, variablen ersetzen
 for f in temp+feucht-DHT22.py weight-datageneration.py
 do
     # / ersetzen durch \/
