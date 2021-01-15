@@ -11,6 +11,7 @@ import Adafruit_DHT
 
 grafanaurl="%GRAFANA_URL%"    #172.23.92.63:8086/write?db=mydb&u=admin&p=PASSWORD
 
+hiveeyesurl="https://swarm.hiveeyes.org/api/hiveeyes/Kryvle/Zietenaugust/"
 
 # Einfach alle Sensoren der Reihe nach auslesen
 sensoren  = [
@@ -46,8 +47,21 @@ while True:
         # If this happens try again!
         if humidity is not None and temperature is not None:
             print('Temp={0:0.1f}°C  Humidity={1:0.1f}%'.format(temperature, humidity))
-            os.system("curl -i -XPOST '"+grafanaurl+"' --data-binary 'temperature,location="+sensor['Ziel']+" value="+str(temperature)+"'")
-            os.system("curl -i -XPOST '"+grafanaurl+"' --data-binary 'humidity,location="+sensor['Ziel']+" value="+str(humidity)+"'")
+            try:
+                os.system("curl -i -XPOST '"+grafanaurl+"' --data-binary 'temperature,location="+sensor['Ziel']+" value="+str(temperature)+"'")
+                os.system("curl -i -XPOST '"+grafanaurl+"' --data-binary 'humidity,location="+sensor['Ziel']+" value="+str(humidity)+"'")
+                print (cmd)
+                os.system(cmd)
+            except:
+                print("no access to local grafana?")
+                pass
+            try:
+                cmd="curl --header \"Content-Type: application/json\" -XPOST -d '{\"temperature\": "+str(temperature)+",\"humidity\": "+str(humidity) +}' "+hiveeyesurl+sensor['Ziel']+"/data"
+                print (cmd)
+                os.system(cmd)
+            except:
+                print("no access to hiveeyes.org?")
+                pass
         else:
             jez = datetime.datetime.now().isoformat()
             print(f"{jez} Fehler bei Sensor {sensor['Name']} Pin:{sensor['Pin']} - keine Werte erhalten.")
