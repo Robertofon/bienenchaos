@@ -25,8 +25,13 @@ GPIOs fürn Raspi und die Sensoren.
 ## Gewichtsmessung 
 
 Zuerst mittels ADDA-Board https://www.waveshare.com/wiki/High-Precision_AD/DA_Board#Interface_Definition
-Später mit dem NAU7802 Board von SparkFun (Qwiic Scale - NAU7802) dieses liefert bequem die Versorgungsspannung mit ausreichend Amper mit.  
+
+Später mit dem NAU7802 Board von SparkFun (Qwiic Scale - NAU7802) dieses liefert bequem die Versorgungsspannung mit ausreichend Amper mit. 
 (Zudem brutzelt man sich nicht irgendwas beim Löten unter Strom weg ...) 
+
+Da die Messung auch das genaue Verhältnis von Eingangssignal zu Speisespannung verwendet fallen Schwankungen der Speisepannung nicht ins Gewicht und 
+das Signal war somit deutlich stabiler. 
+
 Funktionierender Treiber von https://github.com/longapalooza/nau7802py
 
 Verlängerung der Waage (CN) Kabelfarben
