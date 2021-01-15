@@ -22,16 +22,12 @@ GPIOs fürn Raspi und die Sensoren.
 * 3V3 (17) - Alle Datenkabel via 4,7kOhm auf VCC und alle Sensor-VCC
 * GND (34,30) - Alle Sensor-GND
 
+## Gewichtsmessung 
 
-
-## ADDA-Board
-https://www.waveshare.com/wiki/High-Precision_AD/DA_Board#Interface_Definition
-Frei bleibende Pins
-3, 5, 7, 8, 10, 18, 22, 24, 26, 27, 28, 29, 32, 36, 38, 40
-
-funktionierender, inoffizieller Treiber
-https://github.com/ul-gh/PiPyADC
-
+Zuerst mittels ADDA-Board https://www.waveshare.com/wiki/High-Precision_AD/DA_Board#Interface_Definition
+Später mit dem NAU7802 Board von SparkFun (Qwiic Scale - NAU7802) dieses liefert bequem die Versorgungsspannung mit ausreichend Amper mit.  
+(Zudem brutzelt man sich nicht irgendwas beim Löten unter Strom weg ...) 
+Funktionierender Treiber von https://github.com/longapalooza/nau7802py
 
 Verlängerung der Waage (CN) Kabelfarben
 Verlängert durch Netzwerk
