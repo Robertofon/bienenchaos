@@ -27,4 +27,4 @@ if myScale.begin():
         except:
             print("no access to hiveeyes.org?")
             pass
-        time.sleep(1)
+        time.sleep(10)
