@@ -1,4 +1,4 @@
-#!/usr/bin/python
+﻿#!/usr/bin/python
 # Author: Robert Köpferl
 # Skript, um Sensoren des Typs AM2302 auszulesen und die umgerechneten
 # Temperatur und Luftfeuchte-Werte zu pushen

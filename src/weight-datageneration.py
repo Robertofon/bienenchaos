@@ -1,4 +1,4 @@
-import nau7802py
+﻿import nau7802py
 import time,os
 
 myScale = nau7802py.NAU7802()
