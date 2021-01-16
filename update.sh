@@ -39,6 +39,7 @@ chmod 644 /etc/systemd/system/temp-feuchte-sammler.service
 systemctl enable temp-feuchte-sammler
 systemctl enable weight-sammler
 
+echo "Restarte beide Services"
 # und starten
 systemctl restart temp-feuchte-sammler
 systemctl restart weight-sammler

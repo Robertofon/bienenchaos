@@ -56,7 +56,7 @@ while True:
                 print("no access to local grafana?")
                 pass
             try:
-                cmd="curl --header \"Content-Type: application/json\" -XPOST -d '{\"temperature\": "+str(temperature)+",\"humidity\": "+str(humidity) +}' "+hiveeyesurl+sensor['Ziel']+"/data"
+                cmd="curl --header \"Content-Type: application/json\" -XPOST -d '{\"temperature\": "+str(temperature)+",\"humidity\": "+str(humidity) +"}' "+hiveeyesurl+sensor['Ziel']+"/data"
                 print (cmd)
                 os.system(cmd)
             except:
